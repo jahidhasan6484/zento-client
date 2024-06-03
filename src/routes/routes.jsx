@@ -9,6 +9,8 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import Chart from "../pages/dashboard/Chart";
 import AddBlog from "../pages/dashboard/AddBlog";
 import MyBlog from "../pages/dashboard/MyBlog";
+import Details from "../pages/dashboard/Details";
+import UpdateBlog from "../pages/dashboard/UpdateBlog";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +60,14 @@ export const router = createBrowserRouter([
       {
         path: "my-blog",
         element: <MyBlog />,
+      },
+      {
+        path: "my-blog/details/:id",
+        element: <Details />,
+      },
+      {
+        path: "my-blog/update/:id",
+        element: <UpdateBlog />,
       },
     ],
   },
