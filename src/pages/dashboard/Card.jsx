@@ -5,11 +5,11 @@ import { useState } from "react";
 import { LuEye } from "react-icons/lu";
 import { MdModeEdit, MdDelete } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../firebase/firebase.config";
 import { useSignOut } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { IoTimerOutline } from "react-icons/io5";
+import { auth } from "../../firebase/firebase.config";
 
 const Card = ({ blog, loadData }) => {
   const { _id, title, content, image, tag, author, createdAt } = blog;

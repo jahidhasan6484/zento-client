@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import BarChart from "./BarChart";
-import Loading from "../warnings/Loading";
 import toast from "react-hot-toast";
 import axios from "axios";
+import BarChart from "./BarChart";
+import Loading from "../warnings/Loading";
 
 const Chart = () => {
   const [loading, setLoading] = useState(true);

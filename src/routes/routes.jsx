@@ -6,11 +6,14 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import DashboardLayout from "../layouts/DashboardLayout";
-import Chart from "../pages/dashboard/Chart";
 import AddBlog from "../pages/dashboard/AddBlog";
 import MyBlog from "../pages/dashboard/MyBlog";
 import Details from "../pages/dashboard/Details";
 import UpdateBlog from "../pages/dashboard/UpdateBlog";
+import TrendingTopics from "../pages/TrendingTopics";
+import Chart from "../pages/dashboard/Chart";
+import DetailsForUser from "../components/DetailsForUser";
+import ProfileUpdate from "../pages/ProfileUpdate";
 
 export const router = createBrowserRouter([
   {
@@ -22,19 +25,31 @@ export const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      {
+        path: "/trending-topic",
+        element: <TrendingTopics />,
+      },
+      {
+        path: "/trending-topic/details/:id",
+        element: <DetailsForUser />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
+      },
+      {
+        path: "/profile/update",
+        element: <ProfileUpdate />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
     ],
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
   },
   {
     path: "dashboard",

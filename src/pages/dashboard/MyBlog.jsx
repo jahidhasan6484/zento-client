@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useSignOut } from "react-firebase-hooks/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase.config";
-import Card from "../../components/Card";
+import Card from "./Card";
 
 const MyBlog = () => {
   const navigate = useNavigate();
