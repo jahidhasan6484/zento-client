@@ -28,7 +28,7 @@ const CardForUser = ({ blog }) => {
 
         <div className="text-center flex flex-col gap-4 px-6">
           <Link
-            to={`details/${_id}`}
+            to={`trending-topic/details/${_id}`}
             className="text-2xl font-bold -tracking-wide hover:underline"
           >
             {title && title.length > 45 ? `${title.slice(0, 44)}...` : title}

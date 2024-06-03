@@ -1,4 +1,5 @@
 import Hero from "../components/Hero";
+import About from "./About";
 import Community from "./Community";
 import TrendingTopics from "./TrendingTopics";
 
@@ -7,6 +8,7 @@ const Home = () => {
     <div className="min-h-screen bg-[#FFF4F5]">
       <Hero />
       <TrendingTopics />
+      <About />
       <Community />
     </div>
   );

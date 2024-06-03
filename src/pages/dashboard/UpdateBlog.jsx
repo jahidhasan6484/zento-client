@@ -3,7 +3,6 @@ import toast from "react-hot-toast";
 import { tags } from "../../../localDB";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import Back from "../../components/Back";
 import Loading from "../warnings/Loading";
 
 const UpdateBlog = () => {
@@ -88,10 +87,7 @@ const UpdateBlog = () => {
     <div className="bg-[#FFF4F5] min-h-screen lg:py-24 md:p-12">
       <div className="card shrink-0 lg:w-2/5 mx-auto shadow-2xl bg-base-100">
         <form onSubmit={handleUpdateBlog} className="card-body -tracking-wider">
-          <div className="flex flex-row justify-between">
-            <h1 className="text-2xl my-4 lowercase">Update Blog</h1>
-            <Back />
-          </div>
+          <h1 className="text-2xl my-4 lowercase">Update Blog</h1>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Title</span>

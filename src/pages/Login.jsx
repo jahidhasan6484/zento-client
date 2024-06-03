@@ -131,7 +131,6 @@ const Login = () => {
 
           <div className="mt-2 form-control flex flex-row justify-center gap-x-4">
             <GoogleLogin />
-            <FacebookLogin />
           </div>
         </form>
       </div>

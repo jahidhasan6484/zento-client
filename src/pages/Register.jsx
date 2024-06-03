@@ -10,6 +10,7 @@ import { auth } from "../firebase/firebase.config";
 import { useEffect, useState } from "react";
 import { useSignOut } from "react-firebase-hooks/auth";
 import axios from "axios";
+import GoogleLogin from "../auth/GoogleLogin";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -136,6 +137,14 @@ const Register = () => {
             >
               {loading || customLoading ? "Loading" : "Register"}
             </button>
+          </div>
+
+          <div className="flex flex-col justify-center items-center label-text-alt mt-2">
+            <p>Or use social option</p>
+          </div>
+
+          <div className="mt-2 form-control flex flex-row justify-center gap-x-4">
+            <GoogleLogin />
           </div>
         </form>
       </div>

@@ -14,6 +14,8 @@ import TrendingTopics from "../pages/TrendingTopics";
 import Chart from "../pages/dashboard/Chart";
 import DetailsForUser from "../components/DetailsForUser";
 import ProfileUpdate from "../pages/ProfileUpdate";
+import PrivateRoute from "./PrivateRoute";
+import About from "../pages/About";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +28,10 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/about",
+        element: <About />,
+      },
+      {
         path: "/trending-topic",
         element: <TrendingTopics />,
       },
@@ -35,11 +41,19 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/profile/update",
-        element: <ProfileUpdate />,
+        element: (
+          <PrivateRoute>
+            <ProfileUpdate />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -54,9 +68,9 @@ export const router = createBrowserRouter([
   {
     path: "dashboard",
     element: (
-      // <PrivateRoute>
-      <DashboardLayout />
-      // </PrivateRoute>
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
     ),
     errorElement: <Error />,
     children: [
