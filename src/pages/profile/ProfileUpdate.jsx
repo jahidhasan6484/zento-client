@@ -44,11 +44,60 @@ const ProfileUpdate = () => {
     };
 
     fetchUserDetails();
-  }, []);
+  }, [signOut, navigate]);
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+
+    const name = e.target.name.value;
+    const address = e.target.address.value;
+    const dateOfBirth = e.target.dateOfBirth.value;
+    const gender = e.target.gender.value;
+    const maritalStatus = e.target.maritalStatus.value;
+    const contactNumber = e.target.contactNumber.value;
+    const image = e.target.image.files[0];
+
+    const data = {};
+
+    if (name && name !== userDetails.name) {
+      data.name = name;
+    }
+    if (address && address !== userDetails.address) {
+      data.address = address;
+    }
+    if (dateOfBirth && dateOfBirth !== userDetails.dateOfBirth) {
+      data.dateOfBirth = dateOfBirth;
+    }
+    if (gender && gender !== userDetails.gender) {
+      data.gender = gender;
+    }
+    if (maritalStatus && maritalStatus !== userDetails.maritalStatus) {
+      data.maritalStatus = maritalStatus;
+    }
+    if (contactNumber && contactNumber !== userDetails.contactNumber) {
+      data.contactNumber = contactNumber;
+    }
+    if (image) {
+      const toBase64 = (file) =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        });
+
+      try {
+        data.image = await toBase64(image);
+      } catch (error) {
+        setCustomError("An error occurred while converting the image");
+        return;
+      }
+    }
+
+    if (Object.keys(data).length === 0) {
+      setCustomError("There is no changes in your information");
+      return;
+    }
 
     try {
       setCustomLoading(true);
@@ -56,11 +105,11 @@ const ProfileUpdate = () => {
 
       const response = await axios.patch(
         `${import.meta.env.VITE_server}/api/user/update`,
-        formData,
+        data,
         {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
           },
         }
       );

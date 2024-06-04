@@ -2,6 +2,7 @@ import Hero from "../components/Hero";
 import About from "./About";
 import Blogs from "./Blogs";
 import Community from "./Community";
+import Sponsors from "./Sponsors";
 import TrendingTopics from "./TrendingTopics";
 
 const Home = () => {
@@ -12,6 +13,7 @@ const Home = () => {
       <Blogs />
       <About />
       <Community />
+      <Sponsors />
     </div>
   );
 };

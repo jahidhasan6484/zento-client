@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Loading from "./warnings/Loading";
 import CardForUser from "../components/CardForUser";
+import SectionTitle from "../components/SectionTitle";
 
 const Blogs = () => {
   const [loading, setLoading] = useState(false);
@@ -45,7 +46,7 @@ const Blogs = () => {
 
   return (
     <div className="bg-[#FFF4F5] min-h-screen flex flex-col py-12">
-      <h1 className="text-center text-2xl py-12 font-bold">Latest Blogs</h1>
+      <SectionTitle text="Latest blogs" />
       <div className="grid grid-cols-1 md:w-2/3 mx-auto lg:grid-cols-2 xl:grid-cols-3 gap-8">
         {currentBlogs.map((blog, index) => (
           <CardForUser key={index} blog={blog} />

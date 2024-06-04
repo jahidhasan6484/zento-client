@@ -14,6 +14,7 @@ const DetailsForUser = () => {
 
   const fetchData = async () => {
     try {
+      setCustomLoading(true);
       const response = await axios.get(
         `${import.meta.env.VITE_server}/api/blog/one?id=${id}`
       );

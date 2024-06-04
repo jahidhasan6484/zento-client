@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import Loading from "./warnings/Loading";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import SectionTitle from "../components/SectionTitle";
 
 const TrendingTopics = () => {
   const [loading, setLoading] = useState(true);
@@ -56,9 +57,8 @@ const TrendingTopics = () => {
 
   return (
     <div className="bg-[#FFF4F5]">
-      <h1 className="text-center text-2xl py-12 font-bold">Trending Topics</h1>
-
-      <div className="w-full lg:w-2/3 mx-auto bg-white overflow-x-auto hide-scrollbar flex gap-8 p-12 rounded-xl">
+      <SectionTitle text="Trending Topics" />
+      <div className="w-full lg:w-2/3 mx-auto overflow-x-auto hide-scrollbar flex gap-8 px-12 rounded-xl">
         {sortedData.map(([key, value]) => (
           <Link
             to={`trending-topic/${key}`}

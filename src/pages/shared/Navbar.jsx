@@ -64,7 +64,7 @@ const Navbar = () => {
     return (
       <div>
         <Link
-          to={`/trending-topic/details/${_id}`}
+          to={`/search/details/${_id}`}
           className="-tracking-wider p-2 hover:bg-[#FF6481] hover:text-white hover:rounded-lg text-sm"
         >
           {title}
@@ -104,9 +104,6 @@ const Navbar = () => {
             >
               <li>
                 <Link to="about">About</Link>
-              </li>
-              <li>
-                <Link to="trending-topic">Trending Topics</Link>
               </li>
               <li>
                 <Link to="latest-blogs">Latest Blogs</Link>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { tags } from "../../../localDB";
@@ -11,8 +12,6 @@ const UpdateBlog = () => {
   const [customLoading, setCustomLoading] = useState(true);
   const [customError, setCustomError] = useState("");
   const [blog, setBlog] = useState({});
-  // eslint-disable-next-line no-unused-vars
-  const [initialLoaded, setInitialLoaded] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -20,7 +19,6 @@ const UpdateBlog = () => {
         `${import.meta.env.VITE_server}/api/blog/one?id=${id}`
       );
       setBlog(response.data.data);
-      setInitialLoaded(true);
     } catch (error) {
       toast.error("Failed to get details!");
     } finally {
@@ -51,11 +49,39 @@ const UpdateBlog = () => {
       setCustomError("");
     }
 
-    const data = new FormData();
-    data.append("title", title);
-    data.append("content", content);
-    if (image) data.append("image", image);
-    data.append("tag", tag);
+    const data = {};
+
+    if (title && title !== blog.title) {
+      data.title = title;
+    }
+    if (content && content !== blog.content) {
+      data.content = content;
+    }
+    if (tag && tag !== blog.tag) {
+      data.tag = tag;
+    }
+
+    if (image) {
+      const toBase64 = (file) =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = (error) => reject(error);
+        });
+
+      try {
+        data.image = await toBase64(image);
+      } catch (error) {
+        setCustomError("An error occurred while converting the image");
+        return;
+      }
+    }
+
+    if (Object.keys(data).length === 0) {
+      setCustomError("There is no changes in your blog information");
+      return;
+    }
 
     try {
       setCustomLoading(true);
@@ -67,7 +93,7 @@ const UpdateBlog = () => {
         data,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }

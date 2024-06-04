@@ -22,13 +22,24 @@ const AddBlog = () => {
       setCustomError("");
     }
 
-    const data = new FormData();
-    data.append("title", title);
-    data.append("content", content);
-    data.append("image", image);
-    data.append("tag", tag);
+    const toBase64 = (file) =>
+      new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
 
     try {
+      const base64Image = await toBase64(image);
+
+      const data = {
+        title,
+        content,
+        image: base64Image,
+        tag,
+      };
+
       setCustomLoading(true);
 
       const token = localStorage.getItem("token");
@@ -38,7 +49,7 @@ const AddBlog = () => {
         data,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         }
@@ -49,8 +60,8 @@ const AddBlog = () => {
       // Reset the form
       e.target.reset();
     } catch (error) {
+      console.log(error);
       setCustomError("An error occurred while adding the blog");
-      setCustomLoading(false);
     } finally {
       setCustomLoading(false);
     }
@@ -91,9 +102,10 @@ const AddBlog = () => {
             <select
               name="tag"
               className="select select-bordered w-full max-w-xs"
+              defaultValue="" // Set default value here
               required
             >
-              <option value="" disabled selected>
+              <option value="" disabled>
                 Select a tag
               </option>
               {tags.map((tag, index) => (

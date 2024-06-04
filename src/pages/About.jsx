@@ -1,10 +1,10 @@
-import React from "react";
+import SectionTitle from "../components/SectionTitle";
 
+/* eslint-disable react/no-unescaped-entities */
 const About = () => {
   return (
     <div className="bg-[#FFF4F5] min-h-screen flex flex-col py-12">
-      <h1 className="text-center text-2xl py-12 font-bold">Welcome to Zento</h1>
-
+      <SectionTitle text="welcome to Zento" />
       <div className="w-full md:w-2/3 lg:w-1/3 mx-auto -tracking-wider flex flex-col gap-4">
         <div className="chat chat-start">
           <div className="chat-bubble bg-gray-200 text-black">

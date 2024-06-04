@@ -9,7 +9,6 @@ import AddBlog from "../pages/dashboard/AddBlog";
 import MyBlog from "../pages/dashboard/MyBlog";
 import Details from "../pages/dashboard/Details";
 import UpdateBlog from "../pages/dashboard/UpdateBlog";
-import TrendingTopics from "../pages/TrendingTopics";
 import Chart from "../pages/dashboard/Chart";
 import DetailsForUser from "../components/DetailsForUser";
 import PrivateRoute from "./PrivateRoute";
@@ -48,8 +47,8 @@ export const router = createBrowserRouter([
         element: <DetailsForUser />,
       },
       {
-        path: "/trending-topic",
-        element: <TrendingTopics />,
+        path: "/search/details/:id",
+        element: <DetailsForUser />,
       },
       {
         path: "/trending-topic/:key",
