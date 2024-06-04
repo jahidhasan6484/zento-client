@@ -1,15 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import Loading from "./warnings/Loading";
-import { useSignOut } from "react-firebase-hooks/auth";
-import { auth } from "../firebase/firebase.config";
-import { useNavigate, Link } from "react-router-dom";
+import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import { GoPerson } from "react-icons/go";
-import dayjs from "dayjs"; // Assuming you have dayjs installed for date handling
+import dayjs from "dayjs";
+import Loading from "../warnings/Loading";
+import { auth } from "../../firebase/firebase.config";
 
 const UserProfile = () => {
   const navigate = useNavigate();
+
+  const [user] = useAuthState(auth);
+
   const [userDetails, setUserDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [signOut] = useSignOut(auth);
@@ -111,18 +114,20 @@ const UserProfile = () => {
         <div>
           {image ? (
             <img src={image} alt={name} className="w-48 rounded-full" />
+          ) : user?.photoURL ? (
+            <img
+              src={user?.photoURL}
+              alt={name}
+              className="w-48 rounded-full"
+            />
           ) : (
             <GoPerson size={98} />
           )}
         </div>
-
-        <Link to="update" className="btn btn-sm text-sm">
-          update profile
-        </Link>
       </div>
 
-      <div className="w-full lg:w-1/2 flex flex-col gap-4">
-        <h1 className="text-xl lg:text-3xl font-bold">Hey {name} 👋,</h1>
+      <div className="w-full text-center lg:w-1/2 flex flex-col gap-4">
+        <h1 className="text-xl lg:text-3xl font-bold">Hey {name}👋,</h1>
         <p className="-tracking-wider">{userInfo}</p>
       </div>
     </div>

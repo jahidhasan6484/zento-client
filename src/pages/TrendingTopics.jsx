@@ -1,79 +1,80 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Loading from "./warnings/Loading";
-import CardForUser from "../components/CardForUser";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const TrendingTopics = () => {
-  const [loading, setLoading] = useState(false);
-  const [allBlogs, setAllBlogs] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
-  const fetchUserDetails = async () => {
+  const getTotalBlogCount = async () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `${import.meta.env.VITE_server}/api/blog/all`
+        `${import.meta.env.VITE_server}/api/blog/totalCount`
       );
-
-      setAllBlogs(response.data.data.reverse()); // Reverse the array
-    } catch (err) {
-      toast.error("Server error");
+      setData(response.data.data);
+    } catch (error) {
+      toast.error("Server error!");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchUserDetails();
+    getTotalBlogCount();
   }, []);
-
-  // Pagination
-  const blogsPerPage = 6;
-  const totalBlogs = allBlogs.length;
-  const totalPages = Math.ceil(totalBlogs / blogsPerPage);
-
-  const indexOfLastBlog = currentPage * blogsPerPage;
-  const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
-  const currentBlogs = allBlogs.slice(indexOfFirstBlog, indexOfLastBlog);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
     return <Loading />;
   }
+  const sortedData = Object.entries(data).sort((a, b) => b[1] - a[1]);
+
+  const getBgColor = (key) => {
+    switch (key) {
+      case "Education":
+        return "bg-blue-300";
+      case "Food":
+        return "bg-green-300";
+      case "Health":
+        return "bg-red-300";
+      case "Inspiration":
+        return "bg-purple-300";
+      case "Lifestyle":
+        return "bg-yellow-300";
+      case "Music":
+        return "bg-orange-300";
+      case "Technology":
+        return "bg-indigo-300";
+      case "Travel":
+        return "bg-teal-300";
+      default:
+        return "bg-gray-300";
+    }
+  };
 
   return (
-    <div className="bg-[#FFF4F5] min-h-screen flex flex-col py-12">
+    <div className="bg-[#FFF4F5]">
       <h1 className="text-center text-2xl py-12 font-bold">Trending Topics</h1>
-      <div className="grid grid-cols-1 md:w-2/3 mx-auto lg:grid-cols-2 xl:grid-cols-3 gap-8">
-        {currentBlogs.map((blog, index) => (
-          <CardForUser key={index} blog={blog} />
+
+      <div className="w-full lg:w-2/3 mx-auto bg-white overflow-x-auto hide-scrollbar flex gap-8 p-12 rounded-xl">
+        {sortedData.map(([key, value]) => (
+          <Link
+            to={`trending-topic/${key}`}
+            key={key}
+            className={`flex flex-row items-center gap-10 ${getBgColor(
+              key
+            )} -tracking-wider px-4 py-2 rounded-xl`}
+          >
+            <div className="flex flex-col justify-center items-center">
+              <p className="text-xl font-bold">{value}</p>
+              <p>article</p>
+            </div>
+            <h1 className="text-md font-semibold">{key}</h1>
+          </Link>
         ))}
       </div>
-      {totalBlogs > blogsPerPage && (
-        <div className="flex justify-center items-center -tracking-wider my-6 gap-2">
-          {currentPage > 1 && (
-            <button
-              onClick={() => paginate(currentPage - 1)}
-              className="btn btn-sm text-sm bg-[#FF6481] text-white"
-            >
-              Previous
-            </button>
-          )}
-          <p>
-            Page {currentPage} of {totalPages}
-          </p>
-          {currentPage < totalPages && (
-            <button
-              onClick={() => paginate(currentPage + 1)}
-              className="btn btn-sm text-sm bg-[#FF6481] text-white"
-            >
-              Next
-            </button>
-          )}
-        </div>
-      )}
     </div>
   );
 };

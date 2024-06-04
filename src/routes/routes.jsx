@@ -4,7 +4,6 @@ import Error from "../pages/warnings/Error";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import Profile from "../pages/Profile";
 import DashboardLayout from "../layouts/DashboardLayout";
 import AddBlog from "../pages/dashboard/AddBlog";
 import MyBlog from "../pages/dashboard/MyBlog";
@@ -13,9 +12,14 @@ import UpdateBlog from "../pages/dashboard/UpdateBlog";
 import TrendingTopics from "../pages/TrendingTopics";
 import Chart from "../pages/dashboard/Chart";
 import DetailsForUser from "../components/DetailsForUser";
-import ProfileUpdate from "../pages/ProfileUpdate";
 import PrivateRoute from "./PrivateRoute";
 import About from "../pages/About";
+import ProfileLayout from "../layouts/ProfileLayout";
+import ChangePassword from "../pages/profile/ChangePassword";
+import ProfileUpdate from "../pages/profile/ProfileUpdate";
+import UserProfile from "../pages/profile/UserProfile";
+import Blogs from "../pages/Blogs";
+import ShowTopic from "../pages/ShowTopic";
 
 export const router = createBrowserRouter([
   {
@@ -32,28 +36,28 @@ export const router = createBrowserRouter([
         element: <About />,
       },
       {
+        path: "/latest-blogs",
+        element: <Blogs />,
+      },
+      {
+        path: "/latest-blogs/detais/:id",
+        element: <Blogs />,
+      },
+      {
+        path: "/latest-blogs/details/:id",
+        element: <DetailsForUser />,
+      },
+      {
         path: "/trending-topic",
         element: <TrendingTopics />,
       },
       {
-        path: "/trending-topic/details/:id",
+        path: "/trending-topic/:key",
+        element: <ShowTopic />,
+      },
+      {
+        path: "/trending-topic/:key/details/:id",
         element: <DetailsForUser />,
-      },
-      {
-        path: "/profile",
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/profile/update",
-        element: (
-          <PrivateRoute>
-            <ProfileUpdate />
-          </PrivateRoute>
-        ),
       },
       {
         path: "/login",
@@ -97,6 +101,33 @@ export const router = createBrowserRouter([
       {
         path: "my-blog/update/:id",
         element: <UpdateBlog />,
+      },
+    ],
+  },
+  {
+    path: "profile",
+    element: (
+      <PrivateRoute>
+        <ProfileLayout />
+      </PrivateRoute>
+    ),
+    errorElement: <Error />,
+    children: [
+      {
+        index: true,
+        element: <Navigate to="me" />,
+      },
+      {
+        path: "me",
+        element: <UserProfile />,
+      },
+      {
+        path: "update",
+        element: <ProfileUpdate />,
+      },
+      {
+        path: "change-password",
+        element: <ChangePassword />,
       },
     ],
   },

@@ -2,7 +2,7 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { auth } from "../firebase/firebase.config";
 import { useSignOut } from "react-firebase-hooks/auth";
 
-const DashboardLayout = () => {
+const ProfileLayout = () => {
   const navigate = useNavigate();
   const [signOut] = useSignOut(auth);
 
@@ -37,13 +37,13 @@ const DashboardLayout = () => {
               <Link to={"/"}>Home</Link>
             </li>
             <li>
-              <Link to="chart">Chart</Link>
+              <Link to="me">Profile</Link>
             </li>
             <li>
-              <Link to="add-blog">Add Blog</Link>
+              <Link to="update">Update Profile</Link>
             </li>
             <li>
-              <Link to="my-blog">My Blog</Link>
+              <Link to="change-password">Change Password</Link>
             </li>
           </div>
           <div>
@@ -62,4 +62,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default ProfileLayout;

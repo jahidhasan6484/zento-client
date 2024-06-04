@@ -3,7 +3,7 @@
 import { IoPersonCircleOutline, IoTimerOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-const CardForUser = ({ blog }) => {
+const CardForTopic = ({ blog }) => {
   const { _id, title, content, image, tag, author, createdAt } = blog;
 
   const formatDate = (dateString) => {
@@ -47,7 +47,7 @@ const CardForUser = ({ blog }) => {
 
         <div className="text-center flex flex-col gap-4 px-6">
           <Link
-            to={`latest-blogs/details/${_id}`}
+            to={`/trending-topic/${tag}/details/${_id}`}
             className="text-2xl font-bold -tracking-wide hover:underline"
           >
             {title && title.length > 45 ? `${title.slice(0, 44)}...` : title}
@@ -73,4 +73,4 @@ const CardForUser = ({ blog }) => {
   );
 };
 
-export default CardForUser;
+export default CardForTopic;

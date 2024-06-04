@@ -108,6 +108,9 @@ const Navbar = () => {
               <li>
                 <Link to="trending-topic">Trending Topics</Link>
               </li>
+              <li>
+                <Link to="latest-blogs">Latest Blogs</Link>
+              </li>
 
               {user && (
                 <>

@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import Loading from "./warnings/Loading";
 import { useSignOut } from "react-firebase-hooks/auth";
-import { auth } from "../firebase/firebase.config";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase/firebase.config";
+import Loading from "../warnings/Loading";
 
 const ProfileUpdate = () => {
   const navigate = useNavigate();
