@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useUpdatePassword } from "react-firebase-hooks/auth";
 import { auth } from "../../firebase/firebase.config";
 import { useState } from "react";
@@ -5,6 +6,7 @@ import toast from "react-hot-toast";
 
 const ChangePassword = () => {
   const [customError, setCustomError] = useState("");
+  const [customLoading, setCustomLoading] = useState("");
   const [updatePassword, updating, error] = useUpdatePassword(auth);
 
   const handleUpdateProfile = async (e) => {
@@ -23,12 +25,16 @@ const ChangePassword = () => {
       return;
     }
 
+    setCustomError("");
+    setCustomLoading(true);
     const success = await updatePassword(password);
     if (success) {
       toast.success("Updated password");
+      e.target.reset();
     } else {
       toast.error("Failed to update password");
     }
+    setCustomLoading(false);
   };
 
   return (
@@ -69,8 +75,11 @@ const ChangePassword = () => {
             </label>
           </div>
           <div className="form-control mt-6">
-            <button className="btn bg-[#FF6481] text-white" disabled={updating}>
-              {updating ? "Updating" : "Update"}
+            <button
+              className="btn bg-[#FF6481] text-white"
+              disabled={customLoading}
+            >
+              {customLoading ? "Updating" : "Update"}
             </button>
           </div>
         </form>

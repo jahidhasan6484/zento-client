@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import Loading from "./warnings/Loading";
 import CardForTopic from "../components/CardForTopic";
+import SectionTitle from "../components/SectionTitle";
 
 const ShowTopic = () => {
   const { key } = useParams();
@@ -45,8 +46,7 @@ const ShowTopic = () => {
 
   return (
     <div className="bg-[#FFF4F5] min-h-screen flex flex-col py-12">
-      <h1 className="text-center text-2xl py-12 font-bold">{key}</h1>
-
+      <SectionTitle text={key} />
       {!customLoading && currentBlogs.length < 1 && (
         <div className="flex justify-center items-center h-96">
           <p className="text-center text-black -tracking-wider">
