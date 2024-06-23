@@ -13,20 +13,19 @@ const UpdateBlog = () => {
   const [customError, setCustomError] = useState("");
   const [blog, setBlog] = useState({});
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_server}/api/blog/one?id=${id}`
-      );
-      setBlog(response.data.data);
-    } catch (error) {
-      toast.error("Failed to get details!");
-    } finally {
-      setCustomLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_server}/api/blog/one?id=${id}`
+        );
+        setBlog(response.data.data);
+      } catch (error) {
+        toast.error("Failed to get details!");
+      } finally {
+        setCustomLoading(false);
+      }
+    };
     fetchData();
   }, [id]);
 

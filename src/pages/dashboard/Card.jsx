@@ -11,7 +11,7 @@ import { IoPersonCircleOutline } from "react-icons/io5";
 import { IoTimerOutline } from "react-icons/io5";
 import { auth } from "../../firebase/firebase.config";
 
-const Card = ({ blog, loadData }) => {
+const Card = ({ blog, onDelete }) => {
   const { _id, title, content, image, tag, author, createdAt } = blog;
 
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ const Card = ({ blog, loadData }) => {
           },
         }
       );
-      loadData();
+      onDelete(blog._id);
     } catch (err) {
       if (err.response.data.message === "Token has expired") {
         await signOut();

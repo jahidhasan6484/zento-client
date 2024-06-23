@@ -43,7 +43,7 @@ const DashboardLayout = () => {
               <Link to="add-blog">Add Blog</Link>
             </li>
             <li>
-              <Link to="my-blog">My Blog</Link>
+              <Link to="my-blogs">My Blogs</Link>
             </li>
           </div>
           <div>

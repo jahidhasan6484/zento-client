@@ -60,7 +60,6 @@ const AddBlog = () => {
       // Reset the form
       e.target.reset();
     } catch (error) {
-      console.log(error);
       setCustomError("An error occurred while adding the blog");
     } finally {
       setCustomLoading(false);
@@ -102,7 +101,7 @@ const AddBlog = () => {
             <select
               name="tag"
               className="select select-bordered w-full max-w-xs"
-              defaultValue="" // Set default value here
+              defaultValue=""
               required
             >
               <option value="" disabled>
