@@ -6,6 +6,7 @@ import { CiCalendarDate } from "react-icons/ci";
 import { MdUpdate } from "react-icons/md";
 import { CiPen } from "react-icons/ci";
 import Loading from "../pages/warnings/Loading";
+import { convertToLocalBDT } from "../utils/ConvertTime";
 
 const DetailsForUser = () => {
   const { id } = useParams();
@@ -45,15 +46,18 @@ const DetailsForUser = () => {
           <div className="-tracking-wider">
             <p className="flex items-center justify-center gap-1">
               <CiCalendarDate color="#FF7D95" />{" "}
-              <span className="font-bold">Published: </span> June 03, 2024
+              <span className="font-bold">Published: </span>
+              {convertToLocalBDT(blog?.createdAt)}
             </p>
             <p className="flex items-center justify-center gap-1">
               <MdUpdate color="#FF7D95" />{" "}
-              <span className="font-bold">Update: </span>June 03, 2024
+              <span className="font-bold">Update: </span>
+              {convertToLocalBDT(blog?.updatedAt)}
             </p>
             <p className="flex items-center justify-center gap-1">
               <CiPen color="#FF7D95" />{" "}
-              <span className="font-bold">Author: </span>Jahid Hasan Juyel
+              <span className="font-bold">Author: </span>
+              {blog?.author?.name}
             </p>
           </div>
         </div>

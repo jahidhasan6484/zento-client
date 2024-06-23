@@ -5,7 +5,7 @@ const About = () => {
   return (
     <div className="bg-[#FFF4F5] min-h-screen flex flex-col py-12">
       <SectionTitle text="welcome to Zento" />
-      <div className="w-full md:w-2/3 lg:w-1/3 mx-auto -tracking-wider flex flex-col gap-4">
+      <div className="container mx-auto -tracking-wider flex flex-col gap-4">
         <div className="chat chat-start">
           <div className="chat-bubble bg-gray-200 text-black">
             - Zento is not just another blog web portal; it's your digital

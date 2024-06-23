@@ -135,128 +135,138 @@ const ProfileUpdate = () => {
           className="card-body -tracking-wider"
         >
           <h1 className="text-2xl my-4 lowercase">Update Profile</h1>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Name</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Name"
-              name="name"
-              className="input input-bordered"
-              required
-              defaultValue={userDetails?.name}
-            />
+
+          <div className="flex gap-4">
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Name</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Name"
+                name="name"
+                className="input input-bordered"
+                required
+                defaultValue={userDetails?.name}
+              />
+            </div>
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                className="input input-bordered"
+                required
+                defaultValue={userDetails?.email}
+                readOnly
+              />
+            </div>
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              type="email"
-              placeholder="Email"
-              name="email"
-              className="input input-bordered"
-              required
-              defaultValue={userDetails?.email}
-              readOnly
-            />
+
+          <div className="flex gap-4">
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Address</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Address"
+                name="address"
+                className="input input-bordered"
+                defaultValue={userDetails?.address}
+              />
+            </div>
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Date of Birth</span>
+              </label>
+              <input
+                type="date"
+                name="dateOfBirth"
+                className="input input-bordered"
+                defaultValue={userDetails?.dateOfBirth?.split("T")[0]}
+              />
+            </div>
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Address</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Address"
-              name="address"
-              className="input input-bordered"
-              defaultValue={userDetails?.address}
-            />
+
+          <div className="flex gap-4">
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Gender</span>
+              </label>
+              <select
+                name="gender"
+                className="select select-bordered w-full"
+                defaultValue={userDetails?.gender}
+              >
+                <option value="" disabled>
+                  Select a gender
+                </option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Marital Status</span>
+              </label>
+              <select
+                name="maritalStatus"
+                className="select select-bordered w-full"
+                defaultValue={userDetails?.maritalStatus}
+              >
+                <option value="" disabled>
+                  Select a status
+                </option>
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+                <option value="Widowed">Widowed</option>
+              </select>
+            </div>
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Date of Birth</span>
-            </label>
-            <input
-              type="date"
-              name="dateOfBirth"
-              className="input input-bordered"
-              defaultValue={userDetails?.dateOfBirth?.split("T")[0]}
-            />
+
+          <div className="flex gap-4">
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Contact Number</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Contact Number"
+                name="contactNumber"
+                className="input input-bordered"
+                defaultValue={userDetails?.contactNumber}
+              />
+            </div>
+            <div className="form-control flex-1">
+              <label className="label">
+                <span className="label-text">Profile Image</span>
+              </label>
+              <input type="file" name="image" className="file-input w-full" />
+            </div>
           </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Gender</span>
-            </label>
-            <select
-              name="gender"
-              className="select select-bordered w-full max-w-xs"
-              defaultValue={userDetails?.gender}
-            >
-              <option value="" disabled>
-                Select a gender
-              </option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Marital Status</span>
-            </label>
-            <select
-              name="maritalStatus"
-              className="select select-bordered w-full max-w-xs"
-              defaultValue={userDetails?.maritalStatus}
-            >
-              <option value="" disabled>
-                Select a status
-              </option>
-              <option value="Single">Single</option>
-              <option value="Married">Married</option>
-              <option value="Divorced">Divorced</option>
-              <option value="Widowed">Widowed</option>
-            </select>
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Contact Number</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Contact Number"
-              name="contactNumber"
-              className="input input-bordered"
-              defaultValue={userDetails?.contactNumber}
-            />
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Profile Image</span>
-            </label>
-            <input
-              type="file"
-              name="image"
-              className="file-input w-full max-w-xs"
-            />
-            {userDetails?.image && (
-              <div className="mt-2">
-                <span className="label-text">Current Image:</span>
-                <img
-                  src={userDetails.image}
-                  alt="Current profile"
-                  className="mt-2 rounded-md max-h-48"
-                />
-              </div>
-            )}
-            <label className="label">
-              <h1 className="label-text-alt text-red-600 font-semibold">
-                {customError}
-              </h1>
-            </label>
-          </div>
+
+          {userDetails?.image && (
+            <div className="mt-2">
+              <span className="label-text">Current Image:</span>
+              <img
+                src={userDetails.image}
+                alt="Current profile"
+                className="mt-2 rounded-md max-h-48"
+              />
+            </div>
+          )}
+
+          <label className="label">
+            <h1 className="label-text-alt text-red-600 font-semibold">
+              {customError}
+            </h1>
+          </label>
 
           <div className="form-control mt-6">
             <button

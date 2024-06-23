@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import Loading from "../warnings/Loading";
 import { CiCalendarDate } from "react-icons/ci";
 import { MdUpdate } from "react-icons/md";
-import { CiPen } from "react-icons/ci";
+import { convertToLocalBDT } from "../../utils/ConvertTime";
 
 const Details = () => {
   const { id } = useParams();
@@ -45,15 +45,13 @@ const Details = () => {
           <div className="-tracking-wider">
             <p className="flex items-center justify-center gap-1">
               <CiCalendarDate color="#FF7D95" />{" "}
-              <span className="font-bold">Published: </span> June 03, 2024
+              <span className="font-bold">Published: </span>
+              {convertToLocalBDT(blog?.createdAt)}
             </p>
             <p className="flex items-center justify-center gap-1">
               <MdUpdate color="#FF7D95" />{" "}
-              <span className="font-bold">Update: </span>June 03, 2024
-            </p>
-            <p className="flex items-center justify-center gap-1">
-              <CiPen color="#FF7D95" />{" "}
-              <span className="font-bold">Author: </span>Jahid Hasan Juyel
+              <span className="font-bold">Update: </span>{" "}
+              {convertToLocalBDT(blog?.updatedAt)}
             </p>
           </div>
         </div>
